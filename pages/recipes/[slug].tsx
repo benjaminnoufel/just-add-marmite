@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Skeleton from "../../components/Skeleton";
 import {createClient} from "contentful";
 import {documentToReactComponents} from "@contentful/rich-text-react-renderer";
 import {IRecipes, IRecipesFields} from "../../interfaces/Recipes";
@@ -20,7 +21,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths: items.map(recipe => ({params: {slug: recipe.fields.slug}})),
-        fallback: false
+        fallback: true
     };
 };
 
@@ -28,14 +29,28 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({params}: Context) => {
     const {items} = await client.getEntries<IRecipesFields>({"content_type": "recipe", "fields.slug": params.slug});
 
+    if (!items.length) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        };
+    }
+
     return {
         props: {
-            recipe: items[0]
+            recipe: items[0],
+            revalidate: 1
         }
     };
 };
 
 const RecipeDetails = ({recipe}: {recipe: IRecipes}) => {
+    if (!recipe) {
+        return <Skeleton/>;
+    }
+
     const {featuredImage, title, cookingTime, ingredients, method} = recipe.fields;
 
     return (
