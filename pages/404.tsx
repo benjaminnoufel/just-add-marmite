@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
@@ -16,9 +17,15 @@ const NotFound = () => {
 
     return (
         <div className="not-found">
+            <Head>
+                <title>404 Not Found</title>
+                <meta property="og:title" content="404 Not Found" key="title" />
+                <meta name="description" content="This page was not found" />
+                <meta property="og:description" content="This page was not found" key="description" />
+            </Head>
             <h1>404</h1>
             <h2>Ooops ! That page cannot be found :(</h2>
-            <p>Redirecting to <Link href="/">Homepage</Link> for mor marmite gooness...</p>
+            <p>Redirecting to <Link href="/">Homepage</Link> for mor marmite goodness...</p>
 
             <style jsx>{`
             .not-found {

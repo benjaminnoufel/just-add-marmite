@@ -1,14 +1,16 @@
 .PHONY: development build start lint
 
 development:
-	docker-compose run node --service-ports run dev
+	docker-compose run --service-ports node run dev
 
 build:
-	yarn run build
+	docker-compose run yarn run build
 
 start:
-	yarn run start
+	docker-compose run --service-ports -d yarn run start
 
 lint:
-	yarn run lint
+	docker-compose run yarn run lint
 
+install:
+	docker-compose run node install

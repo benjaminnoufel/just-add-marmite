@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import Skeleton from "../../components/Skeleton";
 import {createClient} from "contentful";
@@ -55,6 +56,12 @@ const RecipeDetails = ({recipe}: {recipe: IRecipes}) => {
 
     return (
         <div>
+            <Head>
+                <title>{title} - Just add marmite</title>
+                <meta property="og:title" content={`${title} - Just add marmite`} key="title" />
+                <meta name="description" content={`Prepare ${title} - Takes about ${cookingTime} mins to cook`} />
+                <meta property="og:description" content={`Prepare ${title} - Takes about ${cookingTime} mins to cook`} key="description" />
+            </Head>
             <div className="banner">
                 <Image
                     src={`https:${featuredImage.fields.file.url}`}
