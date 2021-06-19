@@ -9,7 +9,7 @@ build:
 	docker-compose run node run build
 
 start:
-	docker-compose run --service-ports -d --name ${CONTAINER_NAME} node run start
+	docker-compose run --service-ports node run start
 
 lint:
 	docker-compose run node run lint
