@@ -1,6 +1,4 @@
-.PHONY: development build start lint install stop
-
-include .env
+.PHONY: development build start lint install 
 
 development:
 	docker-compose run --service-ports node run dev
@@ -17,5 +15,3 @@ lint:
 install:
 	docker-compose run node install
 
-stop:
-	docker stop ${CONTAINER_NAME}
