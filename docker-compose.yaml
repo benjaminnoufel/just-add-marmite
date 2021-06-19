@@ -5,7 +5,7 @@ services:
     image: node:15.8.0
     user: node
     ports:
-      - ${PORT}:3000
+      - ${INTERNAL_PORT}:3000
     env_file:
       - .env
     volumes:
